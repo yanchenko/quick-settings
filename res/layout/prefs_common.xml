@@ -43,9 +43,16 @@
 
 	</PreferenceCategory>
 
+	<PreferenceCategory android:title="@string/pref_doc">
+		<Preference android:enabled="true" android:key="doc" android:title="@string/pref_online_doc"
+			android:summary="@string/pref_doc_descr" android:selectable="true" />
+	</PreferenceCategory>
+
 	<PreferenceCategory android:title="@string/pref_about">
 		<Preference android:enabled="true" android:key="about" android:title="@string/pref_about"
 			android:summary="@string/pref_about_descr" android:selectable="true" />
+		<Preference android:enabled="true" android:key="about_quicker" android:title="@string/quicker_about"
+			android:summary="@string/quicker_about_descr" android:selectable="true" />
 	</PreferenceCategory>
 
 

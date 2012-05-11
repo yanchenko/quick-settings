@@ -139,7 +139,7 @@
     <string name="pref_disable_mms_descr_disabled">모바일 데이터를 비활성화 시켰을 때, 기기는 MMS를 받지 않을 것입니다.</string>
     <string name="pref_disable_mms_descr_enabled">모바일 데이터를 비활성화 시켰을 지라도, 기기는 MMS를 받기 위해 대기할 것입니다.</string>
 
-    <string name="txt_volume_bind">알람시 벨소리 볼륨을 사용하기</string>
+    <string name="txt_volume_bind">알림 시 벨소리 볼륨을 사용하기</string>
     <string name="txt_initializing">초기화 작업중 ...</string>
     
     <string name="pref_one_click_switch">원클릭 전환</string>

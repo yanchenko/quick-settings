@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="txt_quick_settings">Quick Settings</string>
-
     <string name="txt_status_unknown">Unbekannt</string>
     <string name="txt_status_turned_on">An</string>
     <string name="txt_status_turned_off">Aus</string>
@@ -12,28 +11,28 @@
     
     <string name="wifi_title">Wi-Fi</string>
     <string name="txt_net_status_connecting">Verbinde ...</string>
-    <string name="txt_net_status_obtainingip">Frage IP Address ab...</string>
+    <string name="txt_net_status_obtainingip">Frage IP-Adresse ab...</string>
     <string name="txt_net_status_connected_to">Verbunden mit %s</string>
     <string name="txt_net_status_connected">Verbunden</string>
     <string name="txt_net_status_failed">Verbindung fehlgeschlagen</string>
     <string name="txt_net_status_disconnecting">Trenne ...</string>
     <string name="txt_net_status_disconnected">Getrennt</string>
     
-    <string name="gps_title">GPS Empfänger</string>
+    <string name="gps_title">GPS-Empfänger</string>
     <string name="txt_brightness">Helligkeit</string>
     <string name="msg_disable_autobrightness">Auto-Helligkeit ist aktiviert. Möchtest du es manuell einstellen?</string>
 
     <string name="battery_state_title">Akku Status:</string>
     <string name="battery_state_value">%d%%</string>
-    <string name="txt_memory_state_value">Gerätspeicher frei:</string>
-    <string name="txt_card_state_value">SD Karte frei:</string>
-    <string name="txt_no_card">Keine SD Karte</string>
+    <string name="txt_memory_state_value">Gerätespeicher frei:</string>
+    <string name="txt_card_state_value">SD-Karte frei:</string>
+    <string name="txt_no_card">Keine SD-Karte</string>
 
     <string name="airmode_title">Flugzeugmodus</string>
 
     <string name="btn_yes">Ja</string>
     <string name="btn_no">Nein</string>
-    <string name="btn_close">Schliessen</string>
+    <string name="btn_close">Schließen</string>
     <string name="btn_set">Einstellen</string>
     <string name="btn_calcel">Abbruch</string>
 
@@ -47,7 +46,7 @@
     <string name="txt_bt">Bluetooth</string>
     <string name="txt_no_apn">Kein APN konfiguriert</string>
     
-    <string name="txt_screen_timeout">Display Abschaltung</string>
+    <string name="txt_screen_timeout">Displayabschaltung</string>
     <string name="txt_screen_timeout_value_seconds">%d Sekunden</string>
     <string name="txt_screen_timeout_value_minute">%d Minute</string>
     <string name="txt_screen_timeout_value_minutes">%d Minuten</string>
@@ -57,7 +56,7 @@
     <string name="txt_preferences">Quick Settings > Einstellungen</string>
     <string name="txt_visible_settings">Sichtbare Einstellungen</string>
     <string name="txt_hidden_settings">Versteckte Einstellungen</string>
-    <string name="msg_drag_and_drop">Durch tippen und halten des Eintrags, kann dieser in den sichtbaren bzw.unsichtbaren Bereich verschoben bzw. sortiert werden.</string>
+    <string name="msg_drag_and_drop">Durch Tippen und Halten eines Eintrages kann dieser in den sichtbaren bzw. unsichtbaren Bereich verschoben bzw. darin angeordnet werden.</string>
     
     <string name="txt_auto_sync">Auto-Sync</string>
     <string name="txt_enable_background_data">Tippen um Hintergrund Daten zu aktivieren.</string>
@@ -99,15 +98,15 @@
     <string name="txt_toolbar">Werkzeuge</string>
 
     <string name="pref_common">Allgemein</string>
-    <string name="pref_status_bar">Statusbar Verknüpfung</string>
-    <string name="pref_status_bar_descr">Tippen um die Statusbar Verknüpfung zu aktiviern/deaktivieren</string>
+    <string name="pref_status_bar">Statusleistenverknüpfung</string>
+    <string name="pref_status_bar_descr">Tippen, um die Statusleistenverknüpfung zu aktivieren/deaktivieren</string>
     <string name="pref_view_mode">Erscheinungsbild</string>
-    <string name="pref_view_mode_descr">Tippe um das Erscheinungsbild auf Vollbild oder Dialog zu ändern.</string>
+    <string name="pref_view_mode_descr">Tippen, um das Erscheinungsbild auf Vollbild oder Dialog zu ändern.</string>
     <string name="msg_tap_to_change_settings">Tippe um schnell Einstellungen zu ändern.</string>
 
     <string name="msg_reinstall_required">Quick Settings wurde nicht richtig aktualisiert. Bitte erneut installieren.\n\nWir entschuldigen uns für entstandene Unannehmlichkeiten.</string>
 
-	<string name="txt_master_volume">Master Lautstärke</string>
+	<string name="txt_master_volume">Master-Lautstärke</string>
 	<string name="txt_master_volume_desc">K: %1$d, B: %2$d, M: %3$d, A: %4$d</string>
 
 	<string name="txt_autobrightness_enabled">Auto-Helligkeit ist aktiviert</string>
@@ -117,24 +116,15 @@
     <string name="pref_light_sensor_descr">Tippe um den Lichtsensor zu nutzen bzw. nicht zu nutzen.</string>
 
     <string name="txt_flashlight">Taschenlampe</string>
-    <string name="pref_flashlight_descr">Tippe um den Taschenlampentyp zu ändern.</string>
+    <string name="pref_flashlight_descr">Tippen, um den Typ der Taschenlampe zu ändern.</string>
     <string name="msg_flashlight_led_usage">Übermässiges nutzen des LED Blitzlichts als Taschenlampe kann das Telefon beschädigen. Hiermit erkennst du die möglichen Folgen an.\n\nDu musst die LED Taschenlampe nicht nutzen wenn du den Hinweis nicht akzeptierst.</string>
     <string name="btn_accept">Annehmen</string>
     <string name="msg_flashlight_not_supported">Das LED Blitzlicht kann auf dem Telefon nicht verwendet werden. Die Display-Beleuchtung wird stattdessen genutzt.</string>
 
 	<string name="txt_haptic_feedback">Haptisches Feedback</string>
 	<string name="txt_haptic_feedback_on">Wenn Einstellungsbutton angetippt wurde kurz vibrieren.</string>
-	<string name="txt_haptic_feedback_off">Wenn Einstellungsbutton angetippt wurde nicht vibrieren.</string>
+	<string name="txt_haptic_feedback_off">Nicht vibrieren, wenn Einstellung geändert wird.</string>
 
-<!-- 
-	<string name="txt_addons">Quick Settings > Add-ons</string>
-    <string name="menu_addons">Add-ons</string>
-    <string name="txt_addon_quick_battery">Quick Battery</string>
-    <string name="txt_addon_quick_battery_descr">It is a desktop widget showing remaining battery status in percent and a handy shortcut to Quick Settings application at the same time</string>
-    <string name="txt_install">Install</string>
-    <string name="txt_uninstall">Uninstall</string>
- -->	
-	
     <string name="pref_disable_mms">Deaktiviere MMS</string>
     <string name="pref_disable_mms_descr_disabled">MMS Empfang nicht mehr möglich sobald Mobile Data deaktiviert wurde.</string>
     <string name="pref_disable_mms_descr_enabled">MMS Empfang möglich sogar wenn Mobile Data deaktiviert wurde.</string>
@@ -152,7 +142,7 @@
     <string name="pref_restor_pref_apn_descr">Hilft in einigen Fällen wenn keine Verbindung zustande kommt.</string>
 
     <string name="pref_statusbar_integration">Statusbar Integration</string>
-    <string name="pref_inverse_notif_color">Invertiere die Benachrichtigungsfarbe</string>
+    <string name="pref_inverse_notif_color">Benachrichtigungsfarbe invertieren</string>
     <string name="pref_inverse_notif_color_on">Text und Icon sind jetzt weiss</string>
     <string name="pref_inverse_notif_color_off">Text und Icon sind jetzt schwarz</string>
 
@@ -160,7 +150,7 @@
     <string name="pref_about_descr">Über Quick Settings</string>
 
     <string name="txt_full_brightness">Maximale Helligkeit</string>
-    <string name="txt_full_brightness_descr">Tippe um zu wählen wann die LCD Taschenlampe die volle Helligkeit erreichen soll.</string>
+    <string name="txt_full_brightness_descr">Tippen, um zu wählen, wann die LCD-Taschenlampe ihre volle Helligkeit erreichen soll.</string>
     <string name="msg_flashlight_delay">Halte dein Telefon in eine andere Richtung und die volle Helligkeit wird in ein paar Sekunden erreicht.</string>
     <string name="msg_flashlight_orientation">Neige dein Telefon nach unten um die volle Helligkeit zu erreichen</string>
     <string name="msg_flashlight_shake">Schüttel dein Telefon leicht um die volle Helligkeit zu aktivieren bzw. deaktivieren.</string>
@@ -169,7 +159,7 @@
     <string name="txt_pattern">Muster</string>
     <string name="txt_pin">PIN</string>
     <string name="txt_password">Kennwort</string>
-    <string name="txt_wifi_hotspot">Wi-Fi Hotspot</string>
+    <string name="txt_wifi_hotspot">Wi-Fi - Hotspot</string>
     
 <!-- 1.9.6 -->
     <string name="txt_apn_control">Mobiles Netzwerk (APN)</string>

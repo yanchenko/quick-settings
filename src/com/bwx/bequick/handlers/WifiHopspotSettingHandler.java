@@ -11,6 +11,7 @@ import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.bwx.bequick.Constants;
 import com.bwx.bequick.MainSettingsActivity;
 import com.bwx.bequick.R;
 import com.bwx.bequick.fwk.Setting;
@@ -39,13 +40,19 @@ public class WifiHopspotSettingHandler extends SettingHandler {
 		
 		public boolean setWifiApEnabled(boolean enabled) {
 			
+			if (Constants.DEBUG) {
+				Log.d(TAG, "setWifiApEnabled(" + enabled + ")");
+			}
+			
 			if (enabled) { // disable WiFi in any case
 				mWifiManager.setWifiEnabled(false);
 			}
 			
 			try {
-				Method method = mWifiManager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
-				return (Boolean) method.invoke(mWifiManager, null, enabled);
+				//Method getWifiApConfigurationMethod = mWifiManager.getClass().getMethod("getWifiApConfiguration");
+				//Object config = getWifiApConfigurationMethod.invoke(mWifiManager);
+				Method setWifiApEnabledMethod = mWifiManager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
+				return (Boolean) setWifiApEnabledMethod.invoke(mWifiManager, null, enabled);
 			} catch (Exception e) {
 				Log.e(TAG, "", e);
 				return false;
@@ -113,7 +120,7 @@ public class WifiHopspotSettingHandler extends SettingHandler {
 		if (mWifiApManager.setWifiApEnabled(switched)) {
 			updateState(switched ? WifiApManager.WIFI_AP_STATE_ENABLING : WifiApManager.WIFI_AP_STATE_DISABLING);
 		} else {
-			// TODO show an error
+			Log.e(TAG, "cannot " + (switched ? "enable" : "disable") + " wifi hotspot");
 		}
 	}
 

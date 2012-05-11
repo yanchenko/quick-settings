@@ -1,35 +1,63 @@
 package com.bwx.bequick.handlers;
 
+import static com.bwx.bequick.handlers.apn.ApnControl.STATE_OFF;
+
+import java.lang.reflect.Method;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.bwx.bequick.Constants;
 import com.bwx.bequick.MainSettingsActivity;
 import com.bwx.bequick.R;
 import com.bwx.bequick.fwk.Setting;
 import com.bwx.bequick.fwk.SettingHandler;
+import com.bwx.bequick.handlers.apn.ApnControl;
+import com.bwx.bequick.preferences.MobileDataPrefs;
 
+/**
+ * Does not work in 2.3.3
+ * http://android.git.kernel.org/?p=platform/frameworks/base.git;a=commit;h=f4ece2086f3b7060edc4b93a12f04c9af648867a
+ * http://stackoverflow.com/questions/4715250/how-to-grant-modify-phone-state-permission-for-apps-ran-on-gingerbread
+ * 
+ * @author sergej@beworx.com 
+ */
 public class MobileDataSettingHandler2 extends SettingHandler {
 
 	private static final String TAG = "qs.md";
 	
 	private static class TelephonyManagerExt {
 		
+		private final TelephonyManager mTelManager;
 		private final ConnectivityManager mConnManager;
 		
 		public TelephonyManagerExt(Context context) {
+			mTelManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 			mConnManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		}
 		
 		public boolean setMobileDataEnabled(boolean enabled) {
-			return enabled; // TODO fixme
+			try {
+				Method m = mTelManager.getClass().getDeclaredMethod("getITelephony"); m.setAccessible(true);
+				Object telephony = m.invoke(mTelManager);
+				m = telephony.getClass().getMethod((enabled ? "enable" : "disable") + "DataConnectivity");
+				m.invoke(telephony);
+				return true;
+			} catch (Exception e) {
+				Log.e(TAG, "cannot fake telephony", e);
+				return false;
+			}
 		}
 		
 		public NetworkInfo getMobileDataInfo() {
@@ -78,7 +106,20 @@ public class MobileDataSettingHandler2 extends SettingHandler {
 
 	@Override
 	public void onSwitched(boolean enable) {
+		boolean maySwitchDirectly = MobileDataPrefs.detectMobileDataMode(mActivity.getSharedPreferences(Constants.PREFS_COMMON, 0));
+		if (Constants.DEBUG) {
+			Log.d(TAG, "may switch data directly: " + maySwitchDirectly);
+		}
 
+		if (maySwitchDirectly) {
+			switchMobileDataDirectly(enable);
+		} else {
+			onSelected(0); // just shortcut
+		}
+	}
+
+	
+	private void switchMobileDataDirectly(boolean enable) {
 		boolean mobileDataAllowed = Settings.Secure.getInt(mActivity.getContentResolver(), "mobile_data", 1) == 1;
 		if (enable && !mobileDataAllowed) {
 			// cannot switch - system Mobile Data should be enabled first
@@ -94,7 +135,19 @@ public class MobileDataSettingHandler2 extends SettingHandler {
 			wifiManager.setWifiEnabled(false);
 		}
 		
+		if (enable) {
+			// is APN is disabled we need to enable it first
+			Context context = mActivity;
+			SharedPreferences prefs = mActivity.getApp().getPreferences();
+			int state = ApnControl.getApnState(context, prefs);
+			if (state == STATE_OFF) {
+				ApnControl.setApnState(context, prefs, true);
+			}
+		}
+		
+		// now try to enable connection
 		mTelephonyManager.setMobileDataEnabled(enable);
+		
 		if (enable) {
 			if (++mTryCounter > 2) {
 				// show 2G hint
@@ -107,9 +160,9 @@ public class MobileDataSettingHandler2 extends SettingHandler {
 			}
 		}
 		
-		updateState(enable ? mTelephonyManager.getMobileDataInfo().getState() : State.DISCONNECTING);
+		updateState(enable ? mTelephonyManager.getMobileDataInfo().getState() : State.DISCONNECTING);		
 	}
-
+	
 	@Override
 	public void onValueChanged(int value) {
 		// do nothing

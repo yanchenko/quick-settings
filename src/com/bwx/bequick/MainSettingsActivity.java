@@ -16,15 +16,18 @@
 
 package com.bwx.bequick;
 
+import static com.bwx.bequick.Constants.PREF_ADS_SHOWN;
 import static com.bwx.bequick.Constants.PREF_APPEARANCE;
-import static com.bwx.bequick.Constants.PREF_EULA_ACCEPTED;
 import static com.bwx.bequick.Constants.PREF_FLASHLIGHT;
+import static com.bwx.bequick.Constants.SDK_VERSION;
+import static com.bwx.bequick.Constants.DEBUG;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -163,12 +166,6 @@ public class MainSettingsActivity extends Activity implements OnClickListener, O
 		// check eula
 		SettingsApplication app = mApp = (SettingsApplication) getApplication();
 		SharedPreferences prefs = app.getPreferences();
-		if (!prefs.getBoolean(PREF_EULA_ACCEPTED, false)) {
-			Intent intent = new Intent(this, EulaActivity.class);
-			startActivity(intent);
-			finish();
-			return;
-		}
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.settings_view);
@@ -189,8 +186,39 @@ public class MainSettingsActivity extends Activity implements OnClickListener, O
 		mFlashlight.setOnClickListener(this);
 
 		mLayout = new ListSettingsLayout(findViewById(R.id.settings_list), app);
+		
+		if (SDK_VERSION >= 7) { // quicker compatible
+			boolean shown = prefs.getBoolean(PREF_ADS_SHOWN, false);
+			if (!shown) {
+				prefs.edit().putBoolean(PREF_ADS_SHOWN, true).commit();
+				showDialog(0);
+			}
+		}
+		
 	}
 
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		
+		OnClickListener onclick = new OnClickListener() {
+			public void onClick(View view) {
+				dismissDialog(0);
+				final int viewId = view.getId();
+				if (R.id.button1 == viewId) {
+					CommonPrefs.openQuickerInMarket(MainSettingsActivity.this);
+				}
+			}
+		};
+		
+		Dialog dialog = new Dialog(this);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setContentView(R.layout.quicker_ads);
+		dialog.findViewById(R.id.button1).setOnClickListener(onclick);
+		dialog.findViewById(R.id.button2).setOnClickListener(onclick);
+		
+		return dialog;
+	}
+	
 	private void updateFlashlightView() {
 		ImageButton flashlight = mFlashlight;
 		int pref = mPrefFlashlight;
@@ -280,10 +308,22 @@ public class MainSettingsActivity extends Activity implements OnClickListener, O
             long totalBlocks = stat.getBlockCount();
             long availableBlocks = stat.getAvailableBlocks();
             
+            if (DEBUG) {
+            	Log.d(TAG, "memory/path: " + path + " ------------");
+            	Log.d(TAG, "memory/blockSize: " + blockSize);
+            	Log.d(TAG, "memory/totalBlocks: " + totalBlocks);
+            	Log.d(TAG, "memory/availableBlocks: " + availableBlocks);
+            }
+
             long totalSize = totalBlocks * blockSize;
             long availableSize = availableBlocks * blockSize;
             long availablePercent = (totalSize == 0) ? -1 : availableSize * 100 / totalSize;
-
+            
+            if (Constants.DEBUG) {
+            	Log.d(TAG, "memory/totalSize: " + totalSize);
+            	Log.d(TAG, "memory/availableSize: " + availableSize);
+            }
+            
             String res = getString(resId);
             if (availablePercent > -1) {
             	res += " (" + availablePercent + "%)";

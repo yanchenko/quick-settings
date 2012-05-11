@@ -110,12 +110,14 @@ public class StatusBarIntegrationReceiver extends BroadcastReceiver {
 			mgr.cancel(SHORTCUT_NOTIFICATION);
 		} else {
 			
+			boolean sdk9OrLater = Constants.SDK_VERSION >= 9 /*2.3*/;
+			
 			boolean visible = status != Constants.STATUS_NO_ICON;
 			notification.icon = visible 
 				? (status == Constants.STATUS_BLACK_ICON ? R.drawable.ic_logo_black : R.drawable.ic_logo_white) 
-				: R.drawable.ic_placeholder;
+				: sdk9OrLater ? R.drawable.ic_placeholder : -1;
 				
-			long hiddenTime = Constants.SDK_VERSION >= 9 ? -Long.MAX_VALUE : Long.MAX_VALUE;
+			long hiddenTime = sdk9OrLater ? -Long.MAX_VALUE : Long.MAX_VALUE;
 			notification.when = visible ? System.currentTimeMillis() : hiddenTime; // align left (0) / right (max) in status bar
 			mgr.notify(SHORTCUT_NOTIFICATION, notification);
 		}

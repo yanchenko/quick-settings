@@ -16,21 +16,25 @@
 
 package com.bwx.bequick.handlers;
 
-import android.content.ContentResolver;
+import static com.bwx.bequick.Constants.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.bwx.bequick.Constants;
 import com.bwx.bequick.MainSettingsActivity;
 import com.bwx.bequick.R;
 import com.bwx.bequick.fwk.Setting;
 import com.bwx.bequick.fwk.SettingHandler;
+import com.bwx.bequick.preferences.GpsPrefs;
 
 public class GpsSettingHandler extends SettingHandler {
 
-	private static final String TAG = "qs.gps";
+	private static final String TAG2 = "com.android.settings";
 	
 	public GpsSettingHandler(Setting setting) {
 		super(setting);
@@ -63,17 +67,29 @@ public class GpsSettingHandler extends SettingHandler {
 
 	@Override
 	public void onSwitched(boolean isSwitched) {
-		try {
-			// try to change settings on a rooted phone
-			switchGps(isSwitched);
+		boolean maySwitchDirectly = GpsPrefs.detectGpsMode(mActivity.getSharedPreferences(Constants.PREFS_COMMON, 0));
+		if (Constants.DEBUG) {
+			Log.d(TAG, "may switch GPS directly: " + maySwitchDirectly);
+		}
+
+		if (maySwitchDirectly) {
+			toggleGpsState();
 			updateSetting(isSwitched);
-		} catch (Exception e) {
-			Log.e(TAG, "", e);
-			// this is not a rooted phone - just shortcut to a setting page
+		} else {
 			onSelected(0);
 		}
+			
 	}
 
+	private void toggleGpsState() {
+		Intent intent = new Intent();
+		intent.setClassName(TAG2, TAG2 + ".widget.SettingsAppWidgetProvider");
+		intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
+		intent.setData(Uri.parse(String.valueOf(3))); // ;)
+		mActivity.sendBroadcast(intent);
+	}
+	
+	/*
 	private void switchGps(boolean isSwitched) {
 		
 		final ContentResolver resolver = mActivity.getContentResolver();
@@ -114,7 +130,8 @@ public class GpsSettingHandler extends SettingHandler {
 		}
 		
 	}
-
+	*/
+	
 	@Override
 	public void onValueChanged(int value) {
 		// do nothing, not supported

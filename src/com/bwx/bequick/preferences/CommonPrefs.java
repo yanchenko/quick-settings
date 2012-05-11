@@ -25,6 +25,10 @@ import static com.bwx.bequick.Constants.PREF_INVERSE_VIEW_COLOR;
 import static com.bwx.bequick.Constants.PREF_FLASHLIGHT;
 import static com.bwx.bequick.Constants.PREF_STATUSBAR_INTEGRATION;
 import static com.bwx.bequick.Constants.PREF_ABOUT;
+import static com.bwx.bequick.Constants.PREF_DOC;
+import static com.bwx.bequick.Constants.PREF_ABOUT_QUICKER;
+import static com.bwx.bequick.Constants.SDK_VERSION;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.AlertDialog.Builder;
@@ -35,6 +39,7 @@ import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -57,8 +62,9 @@ public class CommonPrefs extends BasePrefs implements OnClickListener, OnPrefere
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		Preference pref = findPreference(PREF_ABOUT);
-		pref.setOnPreferenceClickListener(this);
+		findPreference(PREF_ABOUT).setOnPreferenceClickListener(this);
+		findPreference(PREF_DOC).setOnPreferenceClickListener(this);
+		findPreference(PREF_ABOUT_QUICKER).setOnPreferenceClickListener(this);
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -137,6 +143,12 @@ public class CommonPrefs extends BasePrefs implements OnClickListener, OnPrefere
 		if (PREF_ABOUT.equals(preference.getKey())) {
 			showDialog(0);
 			return true;
+		} else if (PREF_DOC.equals(preference.getKey())) {
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://code.google.com/p/quick-settings/wiki/TableOfContents"));
+			startActivity(browserIntent);
+		} else if (PREF_ABOUT_QUICKER.equals(preference.getKey())) {
+			openQuickerInMarket(this);
+			return true;
 		}
 
 		return false;
@@ -175,4 +187,22 @@ public class CommonPrefs extends BasePrefs implements OnClickListener, OnPrefere
 		return version;
 	}
 
+	public static void openQuickerInMarket(Activity activity) {
+		
+		if (SDK_VERSION >= 7) {
+			try {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.bwx.quicker"));
+				activity.startActivity(intent);
+				return;
+			} catch (Exception e) {
+				// no market installed, open in browser
+			}
+		}
+
+		// otherwise just show in browser
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://market.android.com/details?id=com.bwx.quicker"));
+		activity.startActivity(browserIntent);
+		
+	}
+	
 }

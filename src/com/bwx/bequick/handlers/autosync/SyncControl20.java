@@ -24,6 +24,7 @@ import android.content.SyncAdapterType;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.bwx.bequick.Constants;
 import com.bwx.bequick.handlers.autosync.AutoSyncSettingHandler.SyncControl;
 
 public class SyncControl20 implements SyncControl {
@@ -63,15 +64,15 @@ public class SyncControl20 implements SyncControl {
         	AccountManager accmgr = AccountManager.get(mContext);
         	for (SyncAdapterType type : types) {
         		
-        		Log.d(TAG, "enabling account, type: " + type.accountType);
-        		
         		Account[] accounts = accmgr.getAccountsByType(type.accountType);
         		for (Account account : accounts) {
         			
+        			if (Constants.DEBUG) {
+        				Log.d(TAG, "synching account, name:" + account.name  + ", type: " + account.type);
+        			}
+        			
         			enabled = ContentResolver.getSyncAutomatically(account, type.authority);
         			if (enabled) {
-        				Log.d(TAG, "requesting account sync, account: " + account.name);
-
         				// trigger update for next account
         				ContentResolver.requestSync(account, type.authority, new Bundle());
         			}

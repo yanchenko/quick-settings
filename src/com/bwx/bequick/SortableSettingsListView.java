@@ -298,7 +298,8 @@ public class SortableSettingsListView extends ListView {
                 	mDragger = null;
                 	
                 	// show APN control warning when needed
-                	if ((setting.id == Setting.MOBILE_DATA_APN || setting.id == Setting.MOBILE_DATA)
+                	if (Constants.SDK_VERSION < 10 /*2.3.3*/ 
+                			&& (setting.id == Setting.MOBILE_DATA_APN || setting.id == Setting.MOBILE_DATA)
                 			&& mAdapter.isInVisibleInList(setting)) {
                 		Toast.makeText(getContext(), R.string.msg_use_mobile_data_hint, Toast.LENGTH_LONG).show();
                 	}

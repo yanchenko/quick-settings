@@ -29,6 +29,8 @@ import com.bwx.bequick.handlers.autosync.AutoSyncSettingHandler;
 import com.bwx.bequick.handlers.wimax.FourGEvoSettingHandler;
 import com.bwx.bequick.preferences.AirplaneModePrefs;
 import com.bwx.bequick.preferences.BrightnessPrefs;
+import com.bwx.bequick.preferences.GpsPrefs;
+import com.bwx.bequick.preferences.MobileDataApnPrefs;
 import com.bwx.bequick.preferences.MobileDataPrefs;
 
 public class SettingsFactory {
@@ -51,6 +53,7 @@ public class SettingsFactory {
 	    		
 	    	case GPS:
 	    		setting = new Setting(GPS, R.drawable.ic_gps, R.string.gps_title, defaultText);
+	    		setting.prefs = GpsPrefs.class;
 	    		break;
 
 	    	case RINGER:
@@ -77,7 +80,7 @@ public class SettingsFactory {
 	    			return null; // not supported
 	    		} else {
 	    			setting = new Setting(MOBILE_DATA_APN, R.drawable.ic_apn, R.string.txt_apn_control, defaultText);
-	    			setting.prefs = MobileDataPrefs.class;
+	    			setting.prefs = MobileDataApnPrefs.class;
 	    		}
 	    		break;
 	    	
@@ -123,6 +126,7 @@ public class SettingsFactory {
 	    	
 	    	case MOBILE_DATA:
 	    		setting = new Setting(MOBILE_DATA, R.drawable.ic_3g, R.string.txt_mobile_data, defaultText);
+	    		setting.prefs = MobileDataPrefs.class;
 	    		break;
 	    		
 	    	case GROUP_VISIBLE:
@@ -134,7 +138,7 @@ public class SettingsFactory {
 	    		break;
     		
 	    	case FOUR_G:
-	    		if (SDK_VERSION >= 8 && Build.MODEL.equals("PC36100")) {
+	    		if (SDK_VERSION >= 8 && (Build.MODEL.equals("PC36100") /*EVO*/ || Build.MODEL.equals("PG06100") /*EVO Shift*/ )) {
 	    			setting = new Setting(FOUR_G, R.drawable.ic_4g, R.string.txt_four_g, defaultText);
 	    		} else {
 	    			return null; // not supported

@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import com.bwx.bequick.Constants;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -74,7 +76,11 @@ public class HtcLedFlashlight implements Flashlight {
 		try {
 			fw = new FileWriter(mFile);
 			fw.write(value);
-			Log.d(TAG, "set brightness: " + value);
+			
+			if (Constants.DEBUG) {
+				Log.d(TAG, "set brightness: " + value);
+			}
+			
 			return true;
 		} catch (Exception e) {
 			return false;

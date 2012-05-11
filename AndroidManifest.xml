@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.bwx.bequick" android:versionCode="201012060" android:versionName="1.9.8 p2">
+	package="com.bwx.bequick" 
+	android:versionName="1.9.9.2"
+	android:versionCode="201106160"
+	>
 
 	<supports-screens android:largeScreens="true" android:anyDensity="true" />
 
-	<application android:name="SettingsApplication"
-		android:icon="@drawable/ic_logo" android:label="Quick Settings">
-
-		<activity android:name=".EulaActivity" android:label="Quick Settings"
-			android:icon="@drawable/ic_logo" android:launchMode="standard"
-			android:theme="@android:style/Theme.NoDisplay">
-		</activity>
+	<application 
+		android:name="SettingsApplication"
+		android:icon="@drawable/ic_logo" 
+		android:label="Quick Settings">
 
 		<activity android:name=".ShowSettingsActivity" android:label="Quick Settings"
 			android:icon="@drawable/ic_logo" android:launchMode="standard"
@@ -27,18 +27,25 @@
 
 		<activity android:name=".DialogSettingsActivity"
 			android:label="Quick Settings" android:icon="@drawable/ic_logo"
-			android:launchMode="singleInstance" android:theme="@style/Theme.NoTitleDialog"
+			android:launchMode="singleInstance" android:theme="@style/NoTitleDialog"
 			android:excludeFromRecents="true">
 		</activity>
 
-		<activity android:name=".MainSettingsActivity" android:label="Quick Settings"
-			android:icon="@drawable/ic_logo" android:launchMode="singleInstance"
-			android:excludeFromRecents="true" android:theme="@style/Theme.NoTitle">
-		</activity>
+		<activity 
+			android:name=".MainSettingsActivity" 
+			android:label="Quick Settings"
+			android:icon="@drawable/ic_logo"
+			android:launchMode="singleInstance"
+			android:excludeFromRecents="true"
+			android:theme="@style/NoTitle"
+			/>
 
-		<activity android:name=".LayoutSettingsActivity"
+		<activity 
+			android:name=".LayoutSettingsActivity"
 			android:label="@string/txt_customize_settings"
-			android:excludeFromRecents="true" android:theme="@style/Theme.NoTitle" />
+			android:excludeFromRecents="true"
+			android:theme="@style/NoTitle" 
+			/>
 
 		<activity android:name=".preferences.CommonPrefs"
 			android:label="@string/txt_preferences" android:excludeFromRecents="true" />
@@ -46,7 +53,13 @@
 		<activity android:name=".preferences.BrightnessPrefs"
 			android:label="@string/txt_preferences" android:excludeFromRecents="true" />
 
+		<activity android:name=".preferences.MobileDataApnPrefs"
+			android:label="@string/txt_preferences" android:excludeFromRecents="true" />
+
 		<activity android:name=".preferences.MobileDataPrefs"
+			android:label="@string/txt_preferences" android:excludeFromRecents="true" />
+
+		<activity android:name=".preferences.GpsPrefs"
 			android:label="@string/txt_preferences" android:excludeFromRecents="true" />
 
 		<activity android:name=".preferences.AirplaneModePrefs"
@@ -76,7 +89,7 @@
 
 	</application>
 
-	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4" />
+	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="4" />
 
 	<!-- access -->
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />

@@ -4,8 +4,8 @@
 	<string-array name="status_bar_variant_names">
 		<item>Zeige schwarzes Icon</item>
 		<item>Zeige weißes Icon</item>
-		<item>Zeige kein Icon aber Text</item>
-		<item>Kein Statusbareintrag</item>
+		<item>Zeige kein Icon, aber Text</item>
+		<item>Kein Statusleisteneintrag</item>
 	</string-array>
 
 	<string-array name="status_bar_variant_values">
@@ -26,8 +26,8 @@
 	</string-array>
 
 	<string-array name="flashlight_names">
-		<item>LCD Taschenlampe</item>
-		<item>LED Taschenlampe</item>
+		<item>LCD-Taschenlampe</item>
+		<item>LED-Taschenlampe</item>
 		<item>Keine Taschenlampe</item>
 	</string-array>
 
@@ -52,7 +52,7 @@
 	<string-array name="flashlight_switch_names">
 		<item>Nach Ausrichtungswechsel</item>
 		<item>Verzögert</item>
-		<item>Durch schütteln</item>
+		<item>Durch Schütteln</item>
 	</string-array>
 
 	<string-array name="flashlight_switch_values">

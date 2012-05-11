@@ -72,18 +72,26 @@ public class MasterVolumeSettingHandler extends SettingHandler {
 	private void updateSettingState() {
 		
 		AudioManager manager = mManager;
-		
-		// get max value for state
+
+		// get current volumes
 		int v1 = manager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		int v2 = manager.getStreamVolume(AudioManager.STREAM_RING);
 		int v3 = manager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
 		int v4 = manager.getStreamVolume(AudioManager.STREAM_ALARM);
-		int value = Math.max(v1, v2 * 2 -1);
-		value = Math.max(value, v3 * 2 - 1);
-		value = Math.max(value, v4 * 2 -1);
+		
+		// get max value for state
+		int maxv1 = manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+		int maxv2 = manager.getStreamMaxVolume(AudioManager.STREAM_RING);
+
+		// get relative values in %
+		int relv2 = Math.round(100f / maxv2 * v2);
+		int relv1 = Math.round(100f / maxv1 * v1);
+		
+		int relv = Math.max(relv2 , relv1); // max between ring & music in %
+		System.out.println("Music: " + relv1 + ", ringer: " + relv2 + ", max: " + relv);
 		
 		RangeSetting setting = (RangeSetting) mSetting;
-		setting.value = value;
+		setting.value = round(15f / 100 * relv); // value 1 .. 15
 		setting.descr = mActivity.getString(R.string.txt_master_volume_desc, v2, v3, v1, v4);
 		setting.updateView();
 		
@@ -108,41 +116,44 @@ public class MasterVolumeSettingHandler extends SettingHandler {
 	public void onValueChanged(int value) {
 
 		RangeSetting setting = (RangeSetting) mSetting;
-		setting.value = value;
+		setting.value = value; 
+		int v = (int) (100f / 15 * value); // value in % 
+		
+		System.out.println("New value: " + setting.value + ", value%=" + v);
 		
 		AudioManager manager = mManager;
 		
-		int value7;
-		switch (value) {
-			case 0:
-			case 1:
-				value7 = value; // first two values are the same
-				break;
-			case 13:
-				value7 = 6;
-				break;
-			default:
-				value7 = Math.round(value * 0.5f); // volume with max=7, value7 should always be louder then media volume
-				value7 = Math.min(value7, 7);
-				break;
-		}
+		// get max value for state
+		int maxv1 = manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+		int maxv2 = manager.getStreamMaxVolume(AudioManager.STREAM_RING);
+		int maxv3 = manager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+		int maxv4 = manager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+
+		// get current volumes
+		int v1, v2, v3, v4;
+
+		manager.setStreamVolume(AudioManager.STREAM_MUSIC, v1 =  round(maxv1 * v / 100f), AudioManager.FLAG_PLAY_SOUND);
+		manager.setStreamVolume(AudioManager.STREAM_RING, v2 = round(maxv2 * v / 100f), 0);
+		manager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, v3 = round(maxv3 * v / 100f), 0);
+		manager.setStreamVolume(AudioManager.STREAM_ALARM, v4 = round(maxv4 * v / 100f), 0);
 		
-		//Log.d(TAG, "set volume, " + value + ", " + value7);
-		
-		manager.setStreamVolume(AudioManager.STREAM_MUSIC, value, 0);
-		manager.setStreamVolume(AudioManager.STREAM_RING, value7, 0);
-		manager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, value7, 0);
-		manager.setStreamVolume(AudioManager.STREAM_ALARM, value7, AudioManager.FLAG_PLAY_SOUND);
-		
-		if (manager.getRingerMode() == AudioManager.RINGER_MODE_SILENT & value7 > 0) {
+		if (manager.getRingerMode() == AudioManager.RINGER_MODE_SILENT & v2 > 0) {
 			manager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-		} else if (manager.getRingerMode() != AudioManager.RINGER_MODE_SILENT && value7 == 0) {
+		} else if (manager.getRingerMode() != AudioManager.RINGER_MODE_SILENT && v2 == 0) {
 			manager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 		}
 
-		setting.descr = mActivity.getString(R.string.txt_master_volume_desc, value7, value7, value, value7);
+		setting.descr = mActivity.getString(R.string.txt_master_volume_desc, v2, v3, v1, v4);
 		setting.updateView();
 		
+	}
+	
+	public static int round(float value) {
+		if (value > 0.2f && value < 0.5f) {
+			return 1;
+		} else {
+			return Math.round(value);
+		}
 	}
 	
 }

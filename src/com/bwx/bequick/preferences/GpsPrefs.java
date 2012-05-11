@@ -28,16 +28,16 @@ import android.util.Log;
 import com.bwx.bequick.Constants;
 import com.bwx.bequick.R;
 
-public class MobileDataPrefs extends BasePrefs {
+public class GpsPrefs extends BasePrefs {
 
-    public MobileDataPrefs() {
-		super(R.layout.prefs_mobile_data);
+    public GpsPrefs() {
+		super(R.layout.prefs_gps);
 	}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
-    	detectMobileDataMode(getPreferenceManager().getSharedPreferences());
+    	detectGpsMode(getPreferenceManager().getSharedPreferences());
     }
     
 	@Override
@@ -45,18 +45,18 @@ public class MobileDataPrefs extends BasePrefs {
 		// nothing
 	}
 
-	public static boolean detectMobileDataMode(SharedPreferences preferences) {
+	public static boolean detectGpsMode(SharedPreferences preferences) {
     	Map<String, ?> prefs = preferences.getAll();
-    	Boolean mode = (Boolean) prefs.get(PREF_MOBILE_DATA_MODE);
+    	Boolean mode = (Boolean) prefs.get(PREF_GPS_MODE);
     	if (mode == null) {
     		// detect default mode
-    		mode = Constants.SDK_VERSION < 10;
+    		mode = Constants.SDK_VERSION < 9; // true - allowed
     		if (DEBUG) {
-    			Log.d(TAG, "Detected " + PREF_MOBILE_DATA_MODE + " " + mode);
+    			Log.d(TAG, "Detected " + PREF_GPS_MODE + " " + mode);
     		}
     		// update preferences
     		Editor editor = preferences.edit();
-    		editor.putBoolean(PREF_MOBILE_DATA_MODE, mode).commit();
+    		editor.putBoolean(PREF_GPS_MODE, mode).commit();
     	}
     	return mode;
 	}

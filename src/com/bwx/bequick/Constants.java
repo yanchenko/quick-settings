@@ -20,6 +20,7 @@ import android.os.Build;
 
 public class Constants {
 
+	public static final boolean DEBUG = true;
 	public static final String TAG = "bwx.qs";
 	
 	public static final String PREFS_COMMON = "Common";
@@ -39,9 +40,13 @@ public class Constants {
 	public static final String PREF_MOBILE_DISABLE_MSG_OK = "disableMobileOk";
 	public static final String PREF_PREFERRED_APN_ID = "preferredApn";
 	public static final String PREF_NO_CONFIRM_AIRMODE = "noConfirmationAirmode";
-	public static final String PREF_EULA_ACCEPTED = "eulaAccepted";
 	public static final String PREF_VERSION = "_version"; // old "version" property was an integer, new "_version" is a string
 	public static final String PREF_ABOUT = "about";
+	public static final String PREF_DOC = "doc";
+	public static final String PREF_ABOUT_QUICKER = "about_quicker";
+	public static final String PREF_ADS_SHOWN = "quickerAddShown";
+	public static final String PREF_MOBILE_DATA_MODE = "mobileDataMode";
+	public static final String PREF_GPS_MODE = "gpsMode";
 	
 	public static final String ACTION_UPDATE_STATUSBAR_INTEGRATION = "com.bwx.bequick.UPDATE_STATUSBAR_INTEGRATION";
 	public static final String ACTION_START_QS = "com.bwx.bequick.START_QS";

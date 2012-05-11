@@ -77,7 +77,7 @@
     <string name="msg_disabled_warning">
     U krijgt deze melding, omdat u \"Mobiel netwerk (APN)\" voor de eerste keer gebruikt.
     \n\nAPN configuraties zijn geüpdatet. Als de verbinding nog steeds aanwezig is, verander de modifier string in de APN regelaar voorkeuren (houd APN instellingen lang ingedrukt).
-    \n\nDeïnstalleer Quick Settings met APN ingeschakeld, anders kunt u \'ll geen verbinding\'ll meer maken en zult u de APN instellingen handmatig moeten aanpassen.
+    \n\nDeïnstalleer Quick Settings met APN ingeschakeld, anders kunt u geen verbinding meer maken en zult u de APN instellingen handmatig moeten aanpassen.
     \n\nBekijk de website van het project voor meer informatie indien u vragen heeft of tegen problemen aanloopt met de APN regelaar.
     </string>
     
@@ -136,8 +136,8 @@
  -->	
 	
     <string name="pref_disable_mms">MMS uitschakelen</string>
-    <string name="pref_disable_mms_descr_disabled">Het apparaat kan geen MMS berichten ontvangen als mobiel netwerk uitschakeld is</string>
-    <string name="pref_disable_mms_descr_enabled">Het apparaat kan MMS berichten ontvangen ongeacht of mobiel netwerk uitgeschekeld is</string>
+    <string name="pref_disable_mms_descr_disabled">Het apparaat kan geen MMS berichten ontvangen als mobiel netwerk is uitgeschakeld</string>
+    <string name="pref_disable_mms_descr_enabled">Het apparaat kan MMS berichten ontvangen ongeacht of mobiel netwerk is uitgeschakeld</string>
 
     <string name="txt_volume_bind">Gebruik beltoon volume voor meldingen</string>
     <string name="txt_initializing">Initialiseren ...</string>
@@ -175,7 +175,7 @@
     <string name="txt_apn_control">Mobiel netwerk (APN)</string>
     <string name="txt_mobile_data">Mobiel netwerk</string>
     <string name="txt_enable_data_access_first">Activeer \"Mobiel netwerk\" eerst in de systeem instellingen</string>
-    <string name="msg_enabling_mobile_data">Activeer mobile data</string>
+    <string name="msg_enabling_mobile_data">Activeer mobiel netwerk</string>
     <string name="msg_2g_hint">Als de verbinding niet tot stand komt, schakel dan de\"Alleen 2G\" checkbox in de systeem instellingen aan en uit om het modem opnieuw te laten verbinden</string>
 
 <!-- 1.9.7 -->
