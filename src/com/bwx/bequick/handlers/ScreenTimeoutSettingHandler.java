@@ -142,8 +142,16 @@ public class ScreenTimeoutSettingHandler extends SettingHandler implements OnIte
 	void onTimeoutSelected(int index) {
 		// update UI
 		setDescription(mValues.getDescriptionByIndex(index), index > -1);
+		
 		// set timeout
-		setTimeout(mValues.getTimeoutByIndex(index));
+		int timeout = mValues.getTimeoutByIndex(index);
+		// TODO REMOVE!!! workaround for timeout
+		/*
+		if (timeout == ScreenTimeoutValues.INDEX_NEVER) {
+			timeout = Integer.MAX_VALUE;
+		}
+		*/
+		setTimeout(timeout);
 		//Log.d(TAG, "onTimeoutSelected");
 	}
 	

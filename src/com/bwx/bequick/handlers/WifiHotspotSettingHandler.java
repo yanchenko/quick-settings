@@ -17,7 +17,7 @@ import com.bwx.bequick.R;
 import com.bwx.bequick.fwk.Setting;
 import com.bwx.bequick.fwk.SettingHandler;
 
-public class WifiHopspotSettingHandler extends SettingHandler {
+public class WifiHotspotSettingHandler extends SettingHandler {
 
 	static final String TAG = "qs.wifihs";
 	
@@ -49,8 +49,14 @@ public class WifiHopspotSettingHandler extends SettingHandler {
 			}
 			
 			try {
-				//Method getWifiApConfigurationMethod = mWifiManager.getClass().getMethod("getWifiApConfiguration");
-				//Object config = getWifiApConfigurationMethod.invoke(mWifiManager);
+				
+				// TODO comment from here
+				/*
+				Method getWifiApConfigurationMethod = mWifiManager.getClass().getMethod("getWifiApConfiguration");
+				Object config = getWifiApConfigurationMethod.invoke(mWifiManager);
+				*/
+				
+				// configuration = null works for many devices
 				Method setWifiApEnabledMethod = mWifiManager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
 				return (Boolean) setWifiApEnabledMethod.invoke(mWifiManager, null, enabled);
 			} catch (Exception e) {
@@ -84,7 +90,7 @@ public class WifiHopspotSettingHandler extends SettingHandler {
 	private final IntentFilter mIntentFilter;
 	private WifiApManager mWifiApManager;
 	
-	public WifiHopspotSettingHandler(Setting setting) {
+	public WifiHotspotSettingHandler(Setting setting) {
 		super(setting);
 		mIntentFilter = new IntentFilter(WifiApManager.WIFI_AP_STATE_CHANGED_ACTION);
 	}

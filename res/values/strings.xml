@@ -205,10 +205,10 @@
     <string name="about_info">&lt;b>Version:&lt;/b> %s&lt;br>&lt;b>Contributers:&lt;/b> Brian Rodgers, Shimon Simon&lt;br>&lt;b>Translators:&lt;/b> Hugo Lopes (pt), Rémi Chéno (fr), Sebastian Thiem (de), Lada Prudek (cs), Gabriele Ravanetti (it), Kay Schasfoort (nl), Hyunho Kim(ko)</string>
     
 <!-- quicker -->
-    <string name="quicker_moto">Quick Settings became Quicker</string>
-    <string name="quicker_features">Bigger buttons, cell or row settings, battery indicator in status bar, drag &amp; drop customization is now easier than ever before.</string>
-    <string name="quicker_on_market">Available on Android Market</string>
-    <string name="quicker_see">See Quicker</string>
+    <string name="quicker_moto">Quicker. For those who quicker.</string>
+    <string name="quicker_features">Quicker brings you best Quick Settings\' functions in visually appealing way and enables you to have any system shortcuts just under your thumb.</string>
+    <string name="quicker_on_market">Available in Android Market</string>
+    <string name="quicker_see">Show Quicker</string>
     <string name="quicker_about">About Quicker</string>
     <string name="quicker_about_descr">Quicker is our new settings application</string>
     <string name="quicker_continue">Continue</string>

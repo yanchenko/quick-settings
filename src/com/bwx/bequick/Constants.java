@@ -20,7 +20,7 @@ import android.os.Build;
 
 public class Constants {
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	public static final String TAG = "bwx.qs";
 	
 	public static final String PREFS_COMMON = "Common";
@@ -44,7 +44,7 @@ public class Constants {
 	public static final String PREF_ABOUT = "about";
 	public static final String PREF_DOC = "doc";
 	public static final String PREF_ABOUT_QUICKER = "about_quicker";
-	public static final String PREF_ADS_SHOWN = "quickerAddShown";
+	public static final String PREF_ADS_SHOWN = "quickerAds";
 	public static final String PREF_MOBILE_DATA_MODE = "mobileDataMode";
 	public static final String PREF_GPS_MODE = "gpsMode";
 	

@@ -56,6 +56,7 @@ public class FroyoLedFlashlight implements Flashlight {
 		if (on) {
 			if (camera == null) {
 				mCamera = camera = Camera.open();
+				camera.startPreview();
 			}
 			Parameters params = camera.getParameters();
 			params.setFlashMode(MODE_TORCH);

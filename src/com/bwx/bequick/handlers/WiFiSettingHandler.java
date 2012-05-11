@@ -30,7 +30,7 @@ import com.bwx.bequick.MainSettingsActivity;
 import com.bwx.bequick.R;
 import com.bwx.bequick.fwk.Setting;
 import com.bwx.bequick.fwk.SettingHandler;
-import com.bwx.bequick.handlers.WifiHopspotSettingHandler.WifiApManager;
+import com.bwx.bequick.handlers.WifiHotspotSettingHandler.WifiApManager;
 
 public class WiFiSettingHandler extends SettingHandler {
 

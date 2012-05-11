@@ -23,7 +23,7 @@ import com.bwx.bequick.handlers.UnlockPatternSettingHandler;
 import com.bwx.bequick.handlers.UnlockPatternSettingHandler22;
 import com.bwx.bequick.handlers.VolumeControlSettingHandler;
 import com.bwx.bequick.handlers.WiFiSettingHandler;
-import com.bwx.bequick.handlers.WifiHopspotSettingHandler;
+import com.bwx.bequick.handlers.WifiHotspotSettingHandler;
 import com.bwx.bequick.handlers.apn.MobileDataSettingHandler;
 import com.bwx.bequick.handlers.autosync.AutoSyncSettingHandler;
 import com.bwx.bequick.handlers.wimax.FourGEvoSettingHandler;
@@ -138,7 +138,11 @@ public class SettingsFactory {
 	    		break;
     		
 	    	case FOUR_G:
-	    		if (SDK_VERSION >= 8 && (Build.MODEL.equals("PC36100") /*EVO*/ || Build.MODEL.equals("PG06100") /*EVO Shift*/ )) {
+	    		if (SDK_VERSION >= 8 
+	    					&& (Build.MODEL.equals("PC36100") /*EVO*/ 
+							|| Build.MODEL.equals("PG06100") /*EVO Shift*/ 
+							|| Build.MODEL.equals("PG86100") /*EVO 3D*/ 
+	    					)) {
 	    			setting = new Setting(FOUR_G, R.drawable.ic_4g, R.string.txt_four_g, defaultText);
 	    		} else {
 	    			return null; // not supported
@@ -183,7 +187,7 @@ public class SettingsFactory {
 	    	case AUTO_ROTATE: return new SystemPropertySettingHandler(setting, Settings.System.ACCELEROMETER_ROTATION, Settings.ACTION_DISPLAY_SETTINGS);
 	    	case LOCK_PATTERN: return SDK_VERSION >= 8 ? new UnlockPatternSettingHandler22(setting) : new UnlockPatternSettingHandler(setting);
 	    	case MASTER_VOLUME: return new MasterVolumeSettingHandler(setting);
-	    	case WIFI_HOTSPOT: return new WifiHopspotSettingHandler(setting);
+	    	case WIFI_HOTSPOT: return new WifiHotspotSettingHandler(setting);
 	    	case MOBILE_DATA: return new MobileDataSettingHandler2(setting);
 	    	case FOUR_G : return new FourGEvoSettingHandler(setting);
 	    	
